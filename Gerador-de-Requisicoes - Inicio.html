@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compras Parque/5</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+
+
+        .sidebar {
+            width: 200px;
+            background-color: #2c3e50;
+            color: white;
+            padding: 15px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .sidebar a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            padding: 10px 0;
+            text-align: center;
+            width: 100%;
+        }
+        .sidebar a:hover {
+            background-color: #34495e;
+        }
+        .content {
+            margin-left: 250px;
+            padding: 20px;
+            flex-grow: 1;
+            margin-top: 300px;
+        }
+	.dashboard {
+            margin: 0px;
+            padding: 0px;
+
+
+        }
+        .hidden {
+            display: none;
+        }
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: #ffffff;
+            z-index: 1000;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            color: #333;
+        }
+        #csvFileInput {
+            margin-bottom: 20px;
+        }
+        #finalTotalSum {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ff0000;
+            margin-bottom: 20px;
+        }
+        .table-wrapper {
+            background-color: #ffffff;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        label {
+            font-weight: bold;
+        }
+        select {
+            margin-right: 20px;
+            padding: 5px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .totalSum {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        .addTableButton, .deleteTableButton {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .deleteTableButton {
+            background-color: #f44336;
+        }
+        .addTableButton:hover, .deleteTableButton:hover {
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <a href="#" onclick="showContent('home')">Início</a>
+        <a href="http://intranet.pqrmnt5.eb.mil.br/requisicoes/Gerador-de-Requisicoes - Gerenciadora.html">Gerador de Requisições - Gerenciadora</a>
+        <a href="http://intranet.pqrmnt5.eb.mil.br/requisicoes/Gerador-de-Requisicoes - Participante.html" >Gerador de Requisições - Participante</a>
+        <a href="http://intranet.pqrmnt5.eb.mil.br/requisicoes/Gerador-de-Requisicoes - Carona.html" >Gerador de Requisições - Carona</a>
+        <a href="#" onclick="showContent('visao-geral-compras')">Visão Geral das Compras</a>
+
+<br>
+<br>
+<br>
+<br>
+
+<!-- hitwebcounter Code START -->
+
+<a href="https://www.hitwebcounter.com" target="_blank">Visitante Número:</a>
+<img src="https://hitwebcounter.com/counter/counter.php?page=14405810&style=0006&nbdigits=5&type=page&initCount=0" title="Counter Widget" Alt="Visit counter For Websites"   border="0" /></a>           
+
+
+
+    </div>
+    <div class="content">
+        <div id="home">
+		<div class="header">
+            		<h1>Início</h1>
+		</div>
+            <p>Esta página visa auxiliar na montagem de requisições, e consultas às informações de pregões.</p>
+
+    <p>
+        <?php include 'contador.php'; ?>
+    </p>
+
+
+        </div>
+
+        <div id="visao-geral-compras" class="hidden">
+		<div class="header">
+        	    <h1>Visão Geral das Compras</h1>
+		</div >
+	    <div class="dashboard">
+		<iframe width="1300" height="900" src="https://lookerstudio.google.com/embed/reporting/4bfab68d-7c7f-43d6-ac4d-68ef70a7d24f/page/p_ksh9yp5vhd" frameborder="0" style="border:0" allowfullscreen sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"></iframe>
+	   </div>        
+        </div>
+
+
+
+    <script>
+        function showContent(contentId) {
+            const contents = document.querySelectorAll('.content > div');
+            contents.forEach(content => {
+                content.classList.add('hidden');
+            });
+            document.getElementById(contentId).classList.remove('hidden');
+        }
+
+        // Exibir a primeira seção por padrão
+        showContent('home');
+
+
+
+
+    </script>
+</body>
+</html>
