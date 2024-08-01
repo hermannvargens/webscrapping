@@ -566,8 +566,6 @@
                 updateSummaryTotal();
             }
 
-
-
             function updateCartTotal() {
                 const total = cart.reduce((sum, item) => sum + parseFloat(item.totalPrice), 0).toFixed(2);
                 document.getElementById('cart-total').textContent = total;
@@ -581,6 +579,7 @@
             document.getElementById('finalize-purchase-button').addEventListener('click', function() {
                 const summaryTable = document.getElementById('summary-table');
                 const rows = Array.from(summaryTable.rows);
+                const finalTotalSum = document.getElementById('summary-total').textContent;
 
                 let htmlContent = `
                     <html>
@@ -620,16 +619,33 @@
                             <tbody>
                 `;
 
+                let empenhoCount = 1;
+                let lastNumeroCompra = '';
+                let lastFornecedor = '';
+
                 rows.slice(1).forEach(row => {
                     const cells = Array.from(row.cells);
-                    if (cells.length > 7) { // Certifique-se de que há células suficientes
+                    if (cells.length > 7) {
                         const quantidadeDropdown = cells[4].querySelector('select');
                         const quantidade = quantidadeDropdown ? quantidadeDropdown.value : cells[4].innerText;
+                        const currentNumeroCompra = cells[0].innerText;
+                        const currentFornecedor = cells[1].innerText;
+
+                        if (currentNumeroCompra !== lastNumeroCompra || currentFornecedor !== lastFornecedor) {
+                            htmlContent += `
+                                <tr>
+                                    <td colspan="8" style="text-align: center;">Empenho ${empenhoCount}</td>
+                                </tr>
+                            `;
+                            empenhoCount++;
+                            lastNumeroCompra = currentNumeroCompra;
+                            lastFornecedor = currentFornecedor;
+                        }
 
                         htmlContent += `
                             <tr>
-                                <td>${cells[0].innerText}</td>
-                                <td>${cells[1].innerText}</td>
+                                <td>${currentNumeroCompra}</td>
+                                <td>${currentFornecedor}</td>
                                 <td>${cells[2].innerText}</td>
                                 <td>${cells[3].innerText}</td>
                                 <td>${quantidade}</td>
@@ -644,6 +660,7 @@
                 htmlContent += `
                             </tbody>
                         </table>
+                        <h4 style="text-align: right;">Valor Total: ${finalTotalSum}</h4>
                     </body>
                     </html>
                 `;
@@ -656,6 +673,8 @@
                 a.click();
                 URL.revokeObjectURL(url);
             });
+
+
 
         });
     </script>
